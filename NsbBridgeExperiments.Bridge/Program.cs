@@ -36,7 +36,7 @@ internal static class Program
         #endregion
 
         #region Bridged transport for "right" side
-        
+
         var rightSqlTransport = new SqlServerTransport(@"Server=(localdb)\ProjectsV13;Initial Catalog=Samples.Bridge.Right;Integrated Security=true");
         var rightBridgeTransport = new BridgeTransport(rightSqlTransport) {
           Name = "sql-right",
@@ -47,11 +47,11 @@ internal static class Program
         rightReceiver.RegisterPublisher(typeof(OrderReceived), "Samples.Bridge.LeftSender");
 
         rightBridgeTransport.HasEndpoint(rightReceiver);
-        
+
         #endregion
 
         #region Bridged transport for "top" side
-        
+
         var topSqlTransport = new SqlServerTransport(@"Server=localhost,1455;Initial Catalog=Samples.Bridge.top;User id=sa;Password=StrongP@ssw0rd;Encrypt=false");
         var topBridgeTransport = new BridgeTransport(topSqlTransport) {
           Name = "sql-top",
@@ -62,7 +62,7 @@ internal static class Program
         topReceiver.RegisterPublisher(typeof(OrderReceived), "Samples.Bridge.LeftSender");
 
         topBridgeTransport.HasEndpoint(topReceiver);
-        
+
         #endregion
 
         #region Add transports to bridge
@@ -70,12 +70,13 @@ internal static class Program
         bridgeConfiguration.AddTransport(leftBridgeTransport);
         bridgeConfiguration.AddTransport(rightBridgeTransport);
         bridgeConfiguration.AddTransport(topBridgeTransport);
-        
+
         bridgeConfiguration.RunInReceiveOnlyTransactionMode();
-        
+
         #endregion
       })
       .Build()
-      .RunAsync().ConfigureAwait(false);
+      .RunAsync()
+      .ConfigureAwait(false);
   }
 }
