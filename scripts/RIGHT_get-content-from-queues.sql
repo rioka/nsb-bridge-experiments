@@ -9,7 +9,7 @@ SELECT 'LeftSender queue on Right'
   ,[Body]
   ,[RowVersion]
 FROM 
-  [Samples.Bridges.Right].[dbo].[LeftSender];
+  [Samples.Bridge.Right].[dbo].[Samples.Bridge.LeftSender];
 
 SELECT 'RightReceiver queue on Right'
   ,[Id]
@@ -21,7 +21,7 @@ SELECT 'RightReceiver queue on Right'
   ,[Body]
   ,[RowVersion]
 FROM
-  [Samples.Bridges.Right].[dbo].[RightReceiver];
+  [Samples.Bridge.Right].[dbo].[Samples.Bridge.RightReceiver];
 
 SELECT 'TopReceiver queue on Right'
   ,[Id]
@@ -33,10 +33,9 @@ SELECT 'TopReceiver queue on Right'
   ,[Body]
   ,[RowVersion]
 FROM
-  [Samples.Bridges.Right].[dbo].[TopReceiver];
+  [Samples.Bridge.Right].[dbo].[Samples.Bridge.TopReceiver];
 
 SELECT 'SubscriptionRouting on Right'
   ,*
 FROM 
-  [Samples.Bridges.Right].[dbo].[SubscriptionRouting];
-
+  [Samples.Bridge.Right].[dbo].[SubscriptionRouting];

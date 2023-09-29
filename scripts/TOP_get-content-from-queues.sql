@@ -9,34 +9,33 @@ SELECT 'LeftSender queue on Top'
   ,[Body]
   ,[RowVersion]
 FROM 
-  [Samples.Bridges.Top].[dbo].[LeftSender];
+  [Samples.Bridge.Top].[dbo].[Samples.Bridge.LeftSender];
 
 SELECT 'RightReceiver queue on Top'
-   ,[Id]
-   ,[CorrelationId]
-   ,[ReplyToAddress]
-   ,[Recoverable]
-   ,[Expires]
-   ,[Headers]
-   ,[Body]
-   ,[RowVersion]
+  ,[Id]
+  ,[CorrelationId]
+  ,[ReplyToAddress]
+  ,[Recoverable]
+  ,[Expires]
+  ,[Headers]
+  ,[Body]
+  ,[RowVersion]
 FROM
-    [Samples.Bridges.Top].[dbo].[RightReceiver];
+    [Samples.Bridge.Top].[dbo].[Samples.Bridge.RightReceiver];
 
 SELECT 'TopReceiver queue on Top'
-   ,[Id]
-   ,[CorrelationId]
-   ,[ReplyToAddress]
-   ,[Recoverable]
-   ,[Expires]
-   ,[Headers]
-   ,[Body]
-   ,[RowVersion]
+  ,[Id]
+  ,[CorrelationId]
+  ,[ReplyToAddress]
+  ,[Recoverable]
+  ,[Expires]
+  ,[Headers]
+  ,[Body]
+  ,[RowVersion]
 FROM
-    [Samples.Bridges.Top].[dbo].[TopReceiver];
+  [Samples.Bridge.Top].[dbo].[Samples.Bridge.TopReceiver];
 
 SELECT 'SubscriptionRouting on Top'
   ,*
 FROM 
-  [Samples.Bridges.Top].[dbo].[SubscriptionRouting];
-
+  [Samples.Bridge.Top].[dbo].[SubscriptionRouting];
