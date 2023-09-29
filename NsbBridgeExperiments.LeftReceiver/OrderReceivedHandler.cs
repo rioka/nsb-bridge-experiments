@@ -12,7 +12,7 @@ public class OrderReceivedHandler :
 
   public Task Handle(OrderReceived message, IMessageHandlerContext context)
   {
-    log.Info($"Subscriber has received OrderReceived event with OrderId {message.OrderId}.");
+    log.Info($"Subscriber has received {nameof(OrderReceived)} event with OrderId {message.OrderId}.");
     return Task.CompletedTask;
   }
 }

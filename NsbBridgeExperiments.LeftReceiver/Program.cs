@@ -22,7 +22,6 @@ static class Program
       .Transactions(TransportTransactionMode.TransactionScope)
       .ConnectionString(ConnectionString);
 
-    endpointConfiguration.Conventions().DefiningMessagesAs(t => t.Name == "OrderResponse");
     endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == "OrderReceived");
 
     endpointConfiguration.AuditProcessedMessagesTo("audit");
