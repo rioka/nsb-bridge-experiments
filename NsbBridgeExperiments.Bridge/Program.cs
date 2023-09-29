@@ -54,7 +54,7 @@ internal static class Program
         
         var topSqlTransport = new SqlServerTransport(@"Server=localhost,1455;Initial Catalog=Samples.Bridge.top;User id=sa;Password=StrongP@ssw0rd");
         var topBridgeTransport = new BridgeTransport(topSqlTransport) {
-          Name = "sql-right",
+          Name = "sql-top",
           AutoCreateQueues = true
         };
 
