@@ -15,7 +15,7 @@ OPEN cur_delete;
 FETCH NEXT FROM cur_delete 
   INTO @schema, @table;
 
---SET @dryRun bit = 0 ;
+--SET @dryRun = 0 ;
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
