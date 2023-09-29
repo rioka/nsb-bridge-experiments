@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\NsbBridgeExperiments.Shared\NsbBridgeExperiments.Shared.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.*" />
+    <PackageReference Include="NServiceBus.MessagingBridge" Version="2.*" />
+    <PackageReference Include="NServiceBus.Transport.SqlServer" Version="7.*" />
+  </ItemGroup>
+  
+</Project>
