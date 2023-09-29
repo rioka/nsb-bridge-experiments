@@ -12,6 +12,8 @@ RightReceiver: processes ""PlaceOrder"" command\n\treplies with ""OrderResponse"
 
 RightReceiver: processes ""OrderReceived"" event
 
+TopReceiver: processes ""OrderReceived"" event
+
 Bridge: moves ""OrderReceived"" event
 
 ' workflow
@@ -25,6 +27,7 @@ LeftSender -[#red]-> LeftReceiver : "" (3) OrderReceived""
 LeftSender -[#red]-> Bridge : "" (3) OrderReceived""
 
 Bridge -[#red,dotted]-> RightReceiver : "" (3) OrderReceived""
+Bridge -[#red,dotted]-> TopReceiver : "" (3) OrderReceived""
 
 @enduml
 ```
@@ -43,6 +46,10 @@ package "SQL2" {
   component RightReceiver as rr
 }
 
+package "SQL3" {
+  component TopReceiver as tr
+}
+
 component Bridge as b
 
 ls -[#green]-> b : " (1) ""PlaceOrder"""
@@ -54,6 +61,7 @@ b -[#blue,dashed]-> ls : " (2) ""OrderResponse"""
 
 b -[#green,dashed]-> rr : " (1) ""PlaceOrder"""
 b -[#red,dashed]-> rr : " (3) ""OrderReceived"""
+b -[#red,dashed]-> tr : " (3) ""OrderReceived"""
 
 @enduml
 ```
@@ -66,21 +74,22 @@ end box
 
 participant Bridge as b
 participant RightReceiver as rr
+participant TopReceiver as tr
 
-ls -> b : ""PlaceOrder""
+ls -> b : send ""PlaceOrder""
 b -[dashed]> rr : ""PlaceOrder""
 
-rr -> b : ""OrderResponse""
+rr -> b : reply ""OrderResponse""
 b -[dashed]> ls : ""OrderResponse""
 
 activate ls
-ls -> lr : ""OrderReceived""
-ls -> b : ""OrderReceived""
+ls -> lr : publish ""OrderReceived""
+ls -> b : publish ""OrderReceived""
 deactivate ls
 
 b -[dashed]> rr : ""OrderReceived""
+b -[dashed]> tr : ""OrderReceived""
 ```
-
 
 ## Detailed analysis
 
@@ -102,4 +111,6 @@ b -[dashed]> rr : ""OrderReceived""
   
   > We can register many NServiceBus endpoints for one bridge endpoint.  
 
-- `LeftSender` processes `OrderResponse`
+- `LeftSender` processes `OrderResponse`, and publishes `OrderReceived` event
+  
+  This event is immediately available to `LeftReceiver`; `RightReceiver` and `TopReceiver` will receive it though the bridge.

@@ -3,7 +3,7 @@ using NServiceBus;
 using NServiceBus.Logging;
 using System.Threading.Tasks;
 
-namespace NsbBridgeExperiments.LeftReceiver;
+namespace NsbBridgeExperiments.TopReceiver;
 
 public class OrderReceivedHandler :
   IHandleMessages<OrderReceived>

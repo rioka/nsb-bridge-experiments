@@ -3,26 +3,26 @@ using NServiceBus;
 using System;
 using System.Threading.Tasks;
 
-namespace NsbBridgeExperiments.LeftReceiver;
+namespace NsbBridgeExperiments.TopReceiver;
 
-static class Program
+internal static class Program
 {
-  private static readonly string ConnectionString = @"Server=(localdb)\MSsqlLocalDb;Initial Catalog=Samples.Bridge.Left;Integrated Security=true";
+  private static readonly string ConnectionString = @"Server=localhost,1455;Initial Catalog=Samples.Bridge.Top;User ID=sa;Password=StrongP@ssw0rd;Encrypt=false";
   
-  static async Task Main()
+  internal static async Task Main()
   {
-    Console.Title = "Samples.Bridge.LeftReceiver";
+    Console.Title = "Samples.Bridge.TopReceiver";
     
     SqlHelper.EnsureDatabaseExists(ConnectionString);
     
-    var endpointConfiguration = new EndpointConfiguration("Samples.Bridge.LeftReceiver");
-   
+    var endpointConfiguration = new EndpointConfiguration("Samples.Bridge.TopReceiver");
+
+    endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == nameof(OrderReceived));
+
     var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
     transport
       .Transactions(TransportTransactionMode.TransactionScope)
       .ConnectionString(ConnectionString);
-
-    endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == nameof(OrderReceived));
 
     endpointConfiguration.AuditProcessedMessagesTo("audit");
     endpointConfiguration.SendFailedMessagesTo("error");
