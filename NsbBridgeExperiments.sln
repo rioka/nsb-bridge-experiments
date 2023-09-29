@@ -23,6 +23,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NsbBridgeExperiments.TopReceiver", "NsbBridgeExperiments.TopReceiver\NsbBridgeExperiments.TopReceiver.csproj", "{4CF2B390-E22D-456B-9BB7-AF5ADB5F007C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql-scripts", "sql-scripts", "{DB7B4E48-8203-49B1-A2F9-5687D8ADE7ED}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\reset-all-tables.sql = scripts\reset-all-tables.sql
+		scripts\LEFT_get-content-from-queues.sql = scripts\LEFT_get-content-from-queues.sql
+		scripts\RIGHT_get-content-from-queues.sql = scripts\RIGHT_get-content-from-queues.sql
+		scripts\TOP_get-content-from-queues.sql = scripts\TOP_get-content-from-queues.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
