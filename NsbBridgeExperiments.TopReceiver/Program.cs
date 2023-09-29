@@ -7,7 +7,7 @@ namespace NsbBridgeExperiments.TopReceiver;
 
 internal static class Program
 {
-  private static readonly string ConnectionString = @"Server=localhost,1455;Initial Catalog=Samples.Bridge.Top;User ID=sa;Password=StrongP@assw0rd;Encrypt=false";
+  private static readonly string ConnectionString = @"Server=localhost,1455;Initial Catalog=Samples.Bridge.Top;User ID=sa;Password=StrongP@ssw0rd;Encrypt=false";
   
   internal static async Task Main()
   {
@@ -17,7 +17,7 @@ internal static class Program
     
     var endpointConfiguration = new EndpointConfiguration("Samples.Bridge.TopReceiver");
 
-    endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == "OrderReceived");
+    endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == nameof(OrderReceived));
 
     var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
     transport
