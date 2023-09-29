@@ -46,14 +46,30 @@ internal static class Program
         var rightReceiver = new BridgeEndpoint("Samples.Bridge.RightReceiver");
         rightReceiver.RegisterPublisher(typeof(OrderReceived), "Samples.Bridge.LeftSender");
 
+        rightBridgeTransport.HasEndpoint(rightReceiver);
+        
         #endregion
 
-        rightBridgeTransport.HasEndpoint(rightReceiver);
+        #region Bridged transport for "top" side
+        
+        var topSqlTransport = new SqlServerTransport(@"Server=localhost,1455;Initial Catalog=Samples.Bridge.top;User id=sa;Password=StrongP@ssw0rd");
+        var topBridgeTransport = new BridgeTransport(topSqlTransport) {
+          Name = "sql-right",
+          AutoCreateQueues = true
+        };
+
+        var topReceiver = new BridgeEndpoint("Samples.Bridge.TopReceiver");
+        topReceiver.RegisterPublisher(typeof(OrderReceived), "Samples.Bridge.LeftSender");
+
+        topBridgeTransport.HasEndpoint(topReceiver);
+        
+        #endregion
 
         #region Add transports to bridge
 
         bridgeConfiguration.AddTransport(leftBridgeTransport);
         bridgeConfiguration.AddTransport(rightBridgeTransport);
+        bridgeConfiguration.AddTransport(topBridgeTransport);
         
         bridgeConfiguration.RunInReceiveOnlyTransactionMode();
         
