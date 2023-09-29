@@ -52,7 +52,7 @@ internal static class Program
 
         #region Bridged transport for "top" side
         
-        var topSqlTransport = new SqlServerTransport(@"Server=localhost,1455;Initial Catalog=Samples.Bridge.top;User id=sa;Password=StrongP@ssw0rd");
+        var topSqlTransport = new SqlServerTransport(@"Server=localhost,1455;Initial Catalog=Samples.Bridge.top;User id=sa;Password=StrongP@ssw0rd;Encrypt=false");
         var topBridgeTransport = new BridgeTransport(topSqlTransport) {
           Name = "sql-top",
           AutoCreateQueues = true
