@@ -17,9 +17,9 @@ static class Program
     
     var endpointConfiguration = new EndpointConfiguration("Samples.Bridge.LeftSender");
 
-    endpointConfiguration.Conventions().DefiningCommandsAs(t => t.Name == "PlaceOrder");
-    endpointConfiguration.Conventions().DefiningMessagesAs(t => t.Name == "OrderResponse");
-    endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == "OrderReceived");
+    endpointConfiguration.Conventions().DefiningCommandsAs(t => t.Name == nameof(PlaceOrder));
+    endpointConfiguration.Conventions().DefiningMessagesAs(t => t.Name == nameof(OrderResponse));
+    endpointConfiguration.Conventions().DefiningEventsAs(t => t.Name == nameof(OrderReceived));
 
     var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
     transport
