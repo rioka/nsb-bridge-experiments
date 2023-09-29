@@ -76,15 +76,15 @@ participant Bridge as b
 participant RightReceiver as rr
 participant TopReceiver as tr
 
-ls -> b : ""PlaceOrder""
+ls -> b : send ""PlaceOrder""
 b -[dashed]> rr : ""PlaceOrder""
 
-rr -> b : ""OrderResponse""
+rr -> b : reply ""OrderResponse""
 b -[dashed]> ls : ""OrderResponse""
 
 activate ls
-ls -> lr : ""OrderReceived""
-ls -> b : ""OrderReceived""
+ls -> lr : publish ""OrderReceived""
+ls -> b : publish ""OrderReceived""
 deactivate ls
 
 b -[dashed]> rr : ""OrderReceived""
